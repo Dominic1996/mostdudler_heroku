@@ -1,0 +1,26 @@
+{
+  "name": "mostdudler",
+  "version": "0.1.5",
+  "description": "A Mostdudler-Node.js app using Express 4",
+  "main": "guestbook.js",
+  "scripts": {
+    "start": "node guestbook.js"
+  },
+  "dependencies": {
+    "express": "4.13.3",
+    "node-mysql": "^0.4.2"
+  },
+  "engines": {
+    "node": "0.12.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Dominic1996/mostdudler-nodejs.git"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
+  "license": "Mostdudler"
+}
