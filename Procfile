@@ -1,1 +1,1 @@
-web: node guestbook.js
+worker: node guestbook.js
