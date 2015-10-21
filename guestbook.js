@@ -73,4 +73,4 @@ process.on( 'SIGTERM', function () {
 });
 
 app.listen(process.env.PORT);
-console.log('Listening at '+process.env.URL+':' + process.env.PORT)
+console.log('Listening at '+process.env.hostname+':' + process.env.PORT)
