@@ -1,1 +1,1 @@
-web: node guestbook.js
+worker: bundle exec rails server -p 1337
