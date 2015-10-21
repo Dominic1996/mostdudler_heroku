@@ -75,9 +75,9 @@ app.post('/', function(req, res) {
     }
 });
 
-process.on( 'SIGTERM', function () {
+/*process.on( 'SIGTERM', function () {
    pg.close();
-});
+});*/
 
 app.listen(process.env.PORT);
 console.log('Listening at '+process.env.host+':' + process.env.PORT)
