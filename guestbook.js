@@ -18,6 +18,7 @@ app.use(function (req, res, next) {
     //res.setHeader('Access-Control-Allow-Headers', 'origin, x-requested-with, content-type');
 
     // Pass to next layer of middleware
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
     next();
 });
 
