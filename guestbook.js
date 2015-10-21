@@ -89,4 +89,4 @@ app.post('/', function(req, res) {
 });*/
 
 app.listen(process.env.PORT);
-console.log('Listening at https://mostdudler.herokuapp.com:' + process.env.PORT)
+console.log('Listening at '+process.env.IP+':' + process.env.PORT)
