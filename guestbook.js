@@ -76,9 +76,7 @@ app.post('/', function(req, res) {
 });
 
 process.on( 'SIGTERM', function () {
-   server.close(function () {
-     pool.close();
-   });
+   pg.close();
 });
 
 app.listen(process.env.PORT);
