@@ -89,4 +89,5 @@ app.post('/', function(req, res) {
 });*/
 
 app.listen(process.env.PORT);
+console.log(JSON.stringify(process.env));
 console.log('Listening at '+process.env.IP+':' + process.env.PORT)
