@@ -7,7 +7,6 @@ var params;
 
 // Add headers
 app.use(function (req, res, next) {
-
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', '*');
 
@@ -19,6 +18,7 @@ app.use(function (req, res, next) {
 
     // Pass to next layer of middleware
     res.setHeader('Access-Control-Allow-Credentials', 'true');
+    
     next();
 });
 
@@ -43,10 +43,15 @@ app.post('/', function(req, res) {
             }
           });
         });
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        res.end('done');
+        var obj = {};
+        
+        res.header('Content-type','application/json');
+        res.header('Charset','utf8');
+        
+        obj.success = "done";
+        res.jsonp(req.body.callback + "(" + JSON.stringify(obj) + ");");
+        res.end();
     } else if (params['mod'] == "get") {
-        res.writeHead(200, {'Content-Type': 'text/html'});
         console.log("Geladene Gaestebucheintraege:");
         pg.connect(conString, function(err, client, done) {
           if(err) {
@@ -56,11 +61,18 @@ app.post('/', function(req, res) {
             if(err) {
               return console.error('error running query', err);
             }
+            
+            var obj = {};
+              
             for (var i in result.rows) {
                 console.log(result.rows[i]);
                 
                 var date = new Date(result.rows[i]['datum']);
-                res.write("<div class='panel panel-primary'><div class='panel-heading '>"+result.rows[i]['name']+" aus "+result.rows[i]['ort']+" am "+date.getDate()+"."+((date.getMonth()+1) < 10 ? ("0"+(date.getMonth()+1)) : (date.getMonth()+1))+"."+date.getFullYear()+" "+(date.getHours() < 10 ? ("0"+date.getHours()) : date.getHours())+":"+(date.getMinutes() < 10 ? ("0"+date.getMinutes()) : date.getMinutes()) +"</div><div class='panel-body'>"+result.rows[i]['eintrag']+"</div></div>");
+                obj.html = "<div class='panel panel-primary'><div class='panel-heading '>"+result.rows[i]['name']+" aus "+result.rows[i]['ort']+" am "+date.getDate()+"."+((date.getMonth()+1) < 10 ? ("0"+(date.getMonth()+1)) : (date.getMonth()+1))+"."+date.getFullYear()+" "+(date.getHours() < 10 ? ("0"+date.getHours()) : date.getHours())+":"+(date.getMinutes() < 10 ? ("0"+date.getMinutes()) : date.getMinutes()) +"</div><div class='panel-body'>"+result.rows[i]['eintrag']+"</div></div>";
+                
+                res.header('Content-type','application/json');
+                res.header('Charset','utf8');
+                res.jsonp(req.body.callback + "(" + JSON.stringify(obj) + ");");
             }
             res.end();
               
